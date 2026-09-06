@@ -94,6 +94,7 @@ Bản Pro là bản dựng riêng, thêm những tính năng tốn nhiều công
 | Lặp đoạn A–B để học ngoại ngữ, tập nhạc | — | ✓ |
 | Nạp phụ đề .srt từ máy bằng kéo thả, dịch giờ phụ đề | — | ✓ |
 | Chế độ ban đêm một nút | — | ✓ |
+| Tua từng khung hình khi tạm dừng | — | ✓ |
 | Nhớ tốc độ phát theo từng trang | — | ✓ |
 | Phím tắt ngay trong cửa sổ PiP | — | ✓ |
 
