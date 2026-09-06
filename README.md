@@ -89,6 +89,7 @@ Bản Pro là bản dựng riêng, thêm những tính năng tốn nhiều công
 | Phụ đề hiển thị ngay trong cửa sổ PiP | — | ✓ |
 | Chụp khung hình & ghi clip đoạn đang xem | — | ✓ |
 | Quy tắc riêng cho từng trang web | — | ✓ |
+| Chỉnh độ sáng, tương phản, xoay, lật gương | — | ✓ |
 | Nhớ tốc độ phát theo từng trang | — | ✓ |
 | Phím tắt ngay trong cửa sổ PiP | — | ✓ |
 
