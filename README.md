@@ -92,6 +92,7 @@ Bản Pro là bản dựng riêng, thêm những tính năng tốn nhiều công
 | Chỉnh độ sáng, tương phản, xoay, lật gương | — | ✓ |
 | Khuếch đại âm lượng tới 300% | — | ✓ |
 | Lặp đoạn A–B để học ngoại ngữ, tập nhạc | — | ✓ |
+| Nạp phụ đề .srt từ máy bằng kéo thả, dịch giờ phụ đề | — | ✓ |
 | Nhớ tốc độ phát theo từng trang | — | ✓ |
 | Phím tắt ngay trong cửa sổ PiP | — | ✓ |
 
