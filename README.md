@@ -90,6 +90,8 @@ Bản Pro là bản dựng riêng, thêm những tính năng tốn nhiều công
 | Chụp khung hình & ghi clip đoạn đang xem | — | ✓ |
 | Quy tắc riêng cho từng trang web | — | ✓ |
 | Chỉnh độ sáng, tương phản, xoay, lật gương | — | ✓ |
+| Khuếch đại âm lượng tới 300% | — | ✓ |
+| Lặp đoạn A–B để học ngoại ngữ, tập nhạc | — | ✓ |
 | Nhớ tốc độ phát theo từng trang | — | ✓ |
 | Phím tắt ngay trong cửa sổ PiP | — | ✓ |
 
