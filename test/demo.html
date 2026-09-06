@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>PiP Viewer — trang thử</title>
+<style>
+  body { margin: 0; padding: 24px; background: #0d0d12; color: #e6e6ed;
+         font: 14px/1.5 system-ui, sans-serif; }
+  h1 { font-size: 17px; margin: 0 0 4px; }
+  p.sub { margin: 0 0 20px; color: #9a9aa8; font-size: 12.5px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; }
+  .card { background: #16161d; border: 1px solid rgba(255,255,255,.09);
+          border-radius: 12px; padding: 12px; }
+  .card h2 { font-size: 12px; margin: 0 0 8px; color: #9a9aa8;
+             text-transform: uppercase; letter-spacing: .06em; }
+  video, img, canvas.demo { width: 100%; border-radius: 8px; background: #000; display: block; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; max-width: 860px; }
+  button { background: #6366f1; color: #fff; border: 0; border-radius: 8px;
+           padding: 9px 13px; font: 600 12px/1 system-ui; cursor: pointer; }
+  button:hover { background: #4f46e5; }
+  #log { margin-top: 16px; padding: 10px 12px; background: #101017; border-radius: 8px;
+         font: 11.5px/1.6 ui-monospace, Consolas, monospace; color: #9a9aa8;
+         max-width: 860px; white-space: pre-wrap; min-height: 40px; }
+</style>
+</head>
+<body>
+<h1>PiP Viewer — trang thử</h1>
+<p class="sub">Mở trực tiếp file này để thử logic content script mà không cần cài extension.
+Các nút bên dưới gọi đúng những thông điệp mà background gửi sang.</p>
+
+<div class="grid">
+  <div class="card"><h2>Video (canvas stream)</h2><video id="v1" muted playsinline></video></div>
+  <div class="card"><h2>Video thứ hai</h2><video id="v2" muted playsinline></video></div>
+  <div class="card"><h2>Ảnh</h2><img id="img1" alt="ảnh thử" /></div>
+  <div class="card"><h2>Canvas động</h2><canvas id="c3" class="demo" width="480" height="270"></canvas></div>
+</div>
+
+<div class="bar">
+  <button data-msg='{"type":"TOGGLE_PIP"}'>TOGGLE_PIP</button>
+  <button data-msg='{"type":"PIP_IMAGE"}'>PIP_IMAGE</button>
+  <button data-msg='{"type":"PICK_ELEMENT"}'>PICK_ELEMENT</button>
+  <button data-msg='{"type":"LIST_MEDIA"}'>LIST_MEDIA</button>
+  <button data-msg='{"type":"PIP_INDEX","index":1}'>PIP_INDEX 1</button>
+  <button data-msg='{"type":"EXIT_PIP"}'>EXIT_PIP</button>
+</div>
+<div id="log">sẵn sàng.</div>
+
+<script>
+/* --- Giả lập API extension để content.js chạy được trong trang thường --- */
+const store = { hoverButton: true, autoPiPOnBlur: false };
+let listener = null;
+window.chrome = {
+  storage: {
+    sync: {
+      get: (d, cb) => cb(Object.assign({}, d, store)),
+      set: (v) => Object.assign(store, v),
+    },
+    onChanged: { addListener() {} },
+  },
+  runtime: { onMessage: { addListener: (fn) => (listener = fn) } },
+};
+window.__send = (msg) =>
+  new Promise((res) => (listener ? listener(msg, {}, res) : res({ ok: false })));
+
+/* --- Nội dung thử --- */
+function makeStream(label, hue) {
+  const c = document.createElement('canvas');
+  c.width = 480; c.height = 270;
+  const ctx = c.getContext('2d');
+  let t = 0;
+  setInterval(() => {
+    t += 0.04;
+    ctx.fillStyle = `hsl(${hue}, 55%, ${12 + Math.sin(t) * 5}%)`;
+    ctx.fillRect(0, 0, 480, 270);
+    ctx.fillStyle = `hsl(${(hue + t * 40) % 360}, 80%, 60%)`;
+    ctx.beginPath();
+    ctx.arc(240 + Math.cos(t) * 150, 135 + Math.sin(t * 1.3) * 80, 34, 0, 7);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = '600 22px system-ui';
+    ctx.fillText(label + '  ' + t.toFixed(1) + 's', 20, 40);
+  }, 40);
+  return c.captureStream(25);
+}
+
+const v1 = document.getElementById('v1');
+const v2 = document.getElementById('v2');
+v1.srcObject = makeStream('VIDEO 1', 250);
+v2.srcObject = makeStream('VIDEO 2', 160);
+v1.play(); v2.play();
+
+const svg = encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500">
+     <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/>
+     </linearGradient></defs>
+     <rect width="800" height="500" fill="url(#g)"/>
+     <text x="400" y="265" font-family="system-ui" font-size="64" font-weight="700"
+           fill="#fff" text-anchor="middle">ẢNH THỬ</text>
+   </svg>`
+);
+document.getElementById('img1').src = 'data:image/svg+xml;charset=utf-8,' + svg;
+
+const c3 = document.getElementById('c3');
+const cx = c3.getContext('2d');
+let a = 0;
+setInterval(() => {
+  a += 0.05;
+  cx.fillStyle = '#0b1020'; cx.fillRect(0, 0, 480, 270);
+  for (let i = 0; i < 12; i++) {
+    cx.fillStyle = `hsl(${(i * 30 + a * 30) % 360}, 75%, 60%)`;
+    cx.fillRect(20 + i * 38, 240 - Math.abs(Math.sin(a + i)) * 190, 26, 200);
+  }
+}, 40);
+
+/* --- Cầu nối nút bấm --- */
+const log = document.getElementById('log');
+for (const b of document.querySelectorAll('[data-msg]')) {
+  b.addEventListener('click', async () => {
+    const msg = JSON.parse(b.dataset.msg);
+    const res = await window.__send(msg);
+    log.textContent = msg.type + ' -> ' + JSON.stringify(res, null, 1);
+  });
+}
+</script>
+<script src="../mv3/content.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cấu hình PiP Viewer</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+<div class="shell">
+
+  <aside>
+    <div class="brand">
+      <img src="icons/icon48.png" alt="" width="34" height="34" />
+      <div>
+        <strong>PiP Viewer</strong>
+        <span id="version">v1.0.0</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#hover" class="active">Nút trên video</a>
+      <a href="#behavior">Hành vi tự động</a>
+      <a href="#display">Hiển thị &amp; ảnh</a>
+      <a href="#sites">Trang loại trừ</a>
+      <a href="#keys">Phím tắt</a>
+      <a href="#pro" class="hl">Nâng cấp Pro</a>
+      <a href="#about">Trạng thái &amp; giới thiệu</a>
+    </nav>
+    <div class="saved" id="saved" hidden>Đã lưu</div>
+  </aside>
+
+  <main>
+    <header class="page-head">
+      <h1>Cấu hình PiP Viewer</h1>
+      <p>Mọi thay đổi được lưu ngay và áp dụng cho các tab đang mở.</p>
+    </header>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="hover">
+      <h2>Nút PiP trên video</h2>
+
+      <div class="row">
+        <div class="label">
+          <strong>Hiện nút khi rê chuột lên video</strong>
+          <span>Một nút nhỏ xuất hiện ở góc video, bấm là mở PiP ngay.</span>
+        </div>
+        <label class="switch"><input type="checkbox" data-key="hoverButton" /><i></i></label>
+      </div>
+
+      <div class="row" data-depends="hoverButton">
+        <div class="label">
+          <strong>Vị trí nút</strong>
+          <span>Góc của video nơi nút hiển thị.</span>
+        </div>
+        <div class="corners" role="radiogroup" aria-label="Vị trí nút">
+          <label><input type="radio" name="hoverPosition" value="tl" data-key="hoverPosition" /><i data-c="tl"></i><span>Trên trái</span></label>
+          <label><input type="radio" name="hoverPosition" value="tr" data-key="hoverPosition" /><i data-c="tr"></i><span>Trên phải</span></label>
+          <label><input type="radio" name="hoverPosition" value="bl" data-key="hoverPosition" /><i data-c="bl"></i><span>Dưới trái</span></label>
+          <label><input type="radio" name="hoverPosition" value="br" data-key="hoverPosition" /><i data-c="br"></i><span>Dưới phải</span></label>
+        </div>
+      </div>
+
+      <div class="row" data-depends="hoverButton">
+        <div class="label">
+          <strong>Bề ngang video tối thiểu</strong>
+          <span>Video hẹp hơn mức này sẽ không hiện nút — tránh làm phiền ở quảng cáo và video nhỏ.</span>
+        </div>
+        <div class="slider">
+          <input type="range" min="80" max="600" step="20" data-key="minVideoWidth" />
+          <output data-for="minVideoWidth">200 px</output>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="behavior">
+      <h2>Hành vi tự động</h2>
+
+      <div class="row">
+        <div class="label">
+          <strong>Tự bật PiP khi chuyển sang tab khác</strong>
+          <span>Video đang phát sẽ tự nổi lên khi bạn rời tab.</span>
+        </div>
+        <label class="switch"><input type="checkbox" data-key="autoPiPOnBlur" /><i></i></label>
+      </div>
+
+      <div class="row" data-depends="autoPiPOnBlur">
+        <div class="label">
+          <strong>Thoát PiP khi quay lại tab</strong>
+          <span>Trả video về đúng vị trí cũ trên trang.</span>
+        </div>
+        <label class="switch"><input type="checkbox" data-key="exitOnReturn" /><i></i></label>
+      </div>
+
+      <div class="row">
+        <div class="label">
+          <strong>Tạm dừng video khi đóng cửa sổ PiP</strong>
+          <span>Mặc định video vẫn chạy tiếp trên trang sau khi đóng PiP.</span>
+        </div>
+        <label class="switch"><input type="checkbox" data-key="pauseOnExit" /><i></i></label>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="display">
+      <h2>Hiển thị &amp; ảnh</h2>
+
+      <div class="row">
+        <div class="label">
+          <strong>Hiện thông báo nhỏ</strong>
+          <span>Thông báo ở cuối trang khi mở PiP hoặc khi có lỗi.</span>
+        </div>
+        <label class="switch"><input type="checkbox" data-key="showToast" /><i></i></label>
+      </div>
+
+      <div class="row">
+        <div class="label">
+          <strong>Cách mở ảnh</strong>
+          <span>Ảnh được vẽ lên canvas rồi phát như video, nhờ vậy nổi trên mọi cửa sổ.</span>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Cách mở ảnh">
+          <label><input type="radio" name="imageMode" value="auto" data-key="imageMode" /><span>Cửa sổ PiP thật</span></label>
+          <label><input type="radio" name="imageMode" value="float" data-key="imageMode" /><span>Cửa sổ nổi trong trang</span></label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">
+          <strong>Bề ngang cửa sổ nổi</strong>
+          <span>Áp dụng cho cửa sổ nổi trong trang (khi trình duyệt không hỗ trợ PiP thật).</span>
+        </div>
+        <div class="slider">
+          <input type="range" min="240" max="900" step="20" data-key="floatWidth" />
+          <output data-for="floatWidth">480 px</output>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="sites">
+      <h2>Trang loại trừ</h2>
+      <p class="note">
+        Trên những trang này, PiP Viewer sẽ không hiện nút khi rê chuột và không tự bật PiP.
+        Bạn vẫn có thể mở PiP thủ công bằng phím tắt hoặc menu chuột phải.
+        Nhập tên miền, ví dụ <code>example.com</code> — các tên miền con cũng được tính.
+      </p>
+      <form id="site-form" class="site-add">
+        <input type="text" id="site-input" placeholder="example.com" spellcheck="false" autocomplete="off" />
+        <button type="submit">Thêm</button>
+      </form>
+      <ul id="site-list" class="chips"></ul>
+      <p class="empty" id="site-empty">Chưa có trang nào bị loại trừ.</p>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="keys">
+      <h2>Phím tắt</h2>
+      <table class="keys">
+        <tbody>
+          <tr><td><kbd>Alt</kbd><kbd>P</kbd></td><td>Bật/tắt PiP cho video đang phát</td></tr>
+          <tr><td><kbd>Alt</kbd><kbd>Shift</kbd><kbd>P</kbd></td><td>Chọn phần tử trên trang để mở PiP</td></tr>
+          <tr><td><span class="unset">chưa gán</span></td><td>Mở PiP cho ảnh lớn nhất trên trang</td></tr>
+        </tbody>
+      </table>
+      <button id="btn-shortcuts" class="ghost">Đổi phím tắt trong trình duyệt</button>
+      <p class="note" id="shortcut-hint" hidden>
+        Mở thủ công trang <code id="shortcut-url">chrome://extensions/shortcuts</code> để đổi phím tắt.
+      </p>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="pro" class="pro">
+      <h2>PiP Viewer Pro</h2>
+      <div class="pro-head">
+        <div>
+          <strong>Bản miễn phí đã đủ dùng hằng ngày.</strong>
+          <span>Bản Pro thêm những thứ cần nhiều công sức bảo trì hơn — mua một lần, dùng mãi.</span>
+        </div>
+        <span class="badge">Đang phát triển</span>
+      </div>
+
+      <table class="compare">
+        <thead>
+          <tr><th>Tính năng</th><th>Miễn phí</th><th>Pro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PiP cho video, ảnh, canvas</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td>Nút hover, phím tắt, menu chuột phải</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td>Trang loại trừ</td><td class="y">✓</td><td class="y">✓</td></tr>
+          <tr><td>Điều khiển trong cửa sổ PiP (tua, tốc độ, âm lượng)</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>Phụ đề &amp; dịch phụ đề trong cửa sổ PiP</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>Ghim nhiều cửa sổ PiP cùng lúc</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>Chụp ảnh màn hình &amp; cắt đoạn video đang xem</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>Quy tắc riêng cho từng trang web</td><td class="n">—</td><td class="y">✓</td></tr>
+          <tr><td>Đồng bộ cấu hình giữa các máy</td><td class="n">—</td><td class="y">✓</td></tr>
+        </tbody>
+      </table>
+
+      <div class="cta">
+        <button id="btn-pro">Xem bản Pro</button>
+        <button id="btn-sponsor" class="ghost">Ủng hộ tác giả</button>
+        <span class="hint">Chưa cần trả tiền để dùng — bản miễn phí không giới hạn thời gian.</span>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------ -->
+    <section id="about">
+      <h2>Trạng thái &amp; giới thiệu</h2>
+      <dl class="status" id="status"></dl>
+      <p class="note">
+        Cách dùng: bấm biểu tượng extension để chọn nhanh, chuột phải lên video hoặc ảnh để mở PiP,
+        hoặc dùng <em>Chọn phần tử</em> rồi nhấp vào video / ảnh / canvas bất kỳ.
+      </p>
+      <div class="links" id="links"></div>
+      <div class="danger">
+        <div class="label">
+          <strong>Khôi phục cài đặt gốc</strong>
+          <span>Xoá mọi tuỳ chỉnh, kể cả danh sách trang loại trừ.</span>
+        </div>
+        <button id="btn-reset" class="warn">Khôi phục</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="defaults.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "pip-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Extension xem video/anh trong che do anh-trong-anh (MV3 + MV2)",
+  "scripts": {
+    "icons": "node tools/make-icons.mjs",
+    "sync": "node tools/sync.mjs",
+    "check": "node tools/check.mjs",
+    "pack": "node tools/pack.mjs",
+    "build": "npm run icons && npm run sync && npm run check"
+  }
+}
