@@ -86,13 +86,16 @@ Bản Pro là bản dựng riêng, thêm những tính năng tốn nhiều công
 | Nút hover, phím tắt, menu chuột phải | ✓ | ✓ |
 | Trang loại trừ | ✓ | ✓ |
 | Điều khiển ngay trong cửa sổ PiP (tua, tốc độ, âm lượng) | — | ✓ |
-| Phụ đề & dịch phụ đề trong cửa sổ PiP | — | ✓ |
-| Ghim nhiều cửa sổ PiP cùng lúc | — | ✓ |
-| Chụp ảnh màn hình & cắt đoạn video đang xem | — | ✓ |
+| Phụ đề hiển thị ngay trong cửa sổ PiP | — | ✓ |
+| Chụp khung hình & ghi clip đoạn đang xem | — | ✓ |
 | Quy tắc riêng cho từng trang web | — | ✓ |
-| Đồng bộ cấu hình giữa các máy | — | ✓ |
+| Nhớ tốc độ phát theo từng trang | — | ✓ |
+| Phím tắt ngay trong cửa sổ PiP | — | ✓ |
 
-Trạng thái: **đang phát triển**. Mở [issue](https://github.com/nguyenquocanhz/pip-viewer/issues)
+Cửa sổ PiP có điều khiển dựa trên Document Picture-in-Picture, cần Chrome 116 trở lên;
+trình duyệt cũ hơn sẽ dùng cửa sổ nổi trong trang với cùng bộ điều khiển.
+
+Trạng thái: **đang thử nghiệm nội bộ**. Mở [issue](https://github.com/nguyenquocanhz/pip-viewer/issues)
 để đăng ký nhận thông báo khi mở bán, hoặc để đề xuất tính năng bạn muốn có trong bản Pro.
 
 ## ❤ Ủng hộ tác giả

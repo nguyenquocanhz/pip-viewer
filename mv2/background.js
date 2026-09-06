@@ -4,6 +4,15 @@
  */
 const api = globalThis.chrome || globalThis.browser;
 
+/**
+ * Điểm mở rộng: mô-đun ngoài khai báo globalThis.PIP_COMMANDS trước khi file
+ * này chạy để thêm lệnh phím tắt và mục menu chuột phải riêng.
+ *   PIP_COMMANDS = { 'ten-lenh': (tab, send) => send(tab.id, { type: 'X' }) }
+ *   PIP_MENUS    = [ { id, title, contexts, message } ]
+ */
+const EXTRA_COMMANDS = globalThis.PIP_COMMANDS || {};
+const EXTRA_MENUS = globalThis.PIP_MENUS || [];
+
 const MENUS = [
   { id: 'pip-video', title: 'Xem video trong ảnh-trong-ảnh', contexts: ['video'] },
   { id: 'pip-image', title: 'Xem ảnh trong ảnh-trong-ảnh', contexts: ['image'] },
@@ -14,8 +23,8 @@ const MENUS = [
 function buildMenus() {
   if (!api.contextMenus) return;
   api.contextMenus.removeAll(() => {
-    for (const m of MENUS) {
-      try { api.contextMenus.create(m); } catch (_) {}
+    for (const m of [...MENUS, ...EXTRA_MENUS]) {
+      try { api.contextMenus.create({ id: m.id, title: m.title, contexts: m.contexts }); } catch (_) {}
     }
   });
 }
@@ -74,7 +83,8 @@ if (api.commands) {
     api.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const tab = tabs && tabs[0];
       if (!tab || tab.id == null) return;
-      if (command === 'toggle-pip') send(tab.id, { type: 'TOGGLE_PIP' });
+      if (EXTRA_COMMANDS[command]) EXTRA_COMMANDS[command](tab, send);
+      else if (command === 'toggle-pip') send(tab.id, { type: 'TOGGLE_PIP' });
       else if (command === 'pick-element') send(tab.id, { type: 'PICK_ELEMENT' });
       else if (command === 'pip-image') send(tab.id, { type: 'PIP_IMAGE' });
     });
@@ -86,6 +96,8 @@ if (api.contextMenus) {
   api.contextMenus.onClicked.addListener((info, tab) => {
     if (!tab || tab.id == null) return;
     const frameId = info.frameId;
+    const extra = EXTRA_MENUS.find((m) => m.id === info.menuItemId);
+    if (extra) return send(tab.id, extra.message, frameId);
     switch (info.menuItemId) {
       case 'pip-video':
         send(tab.id, { type: 'PIP_CONTEXT_VIDEO' }, frameId);
