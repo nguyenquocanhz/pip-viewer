@@ -31,9 +31,11 @@ var PIP_LINKS = {
   issues: 'https://github.com/nguyenquocanhz/pip-viewer/issues',
   sponsor: 'https://github.com/sponsors/nguyenquocanhz',
   pro: 'https://github.com/nguyenquocanhz/pip-viewer#-pip-viewer-pro',
-  // TODO: điền kênh của bạn rồi nút sẽ hiện ra
-  kofi: '',
+  // TODO: điền kênh của bạn rồi nút sẽ hiện ra.
+  // MoMo: mở app > Nhận tiền > Chia sẻ link, được dạng https://me.momo.vn/xxxxxxxx
+  // (đừng dùng link nhantien.momo.vn/<số điện thoại> — nó công khai số của bạn)
   momo: '',
+  kofi: '',
   paypal: '',
 };
 

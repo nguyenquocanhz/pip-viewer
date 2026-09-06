@@ -95,7 +95,7 @@ Dự án làm ngoài giờ và cho không. Nếu nó tiết kiệm thời gian c
 - 🐛 Báo lỗi, góp ý, gửi pull request
 
 > Người bảo trì: sửa `PIP_LINKS` trong [`mv3/defaults.js`](mv3/defaults.js) để thêm
-> Ko-fi / MoMo / PayPal — nút nào có link thì hiện, để trống thì tự ẩn.
+> MoMo / Ko-fi / PayPal — nút nào có link thì hiện, để trống thì tự ẩn.
 > Nhớ bật GitHub Sponsors và cập nhật [`.github/FUNDING.yml`](.github/FUNDING.yml).
 
 ## Phát triển
