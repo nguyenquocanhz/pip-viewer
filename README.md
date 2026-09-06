@@ -3,6 +3,7 @@
 Extension mở video, ảnh hoặc canvas bất kỳ trên trang web vào một cửa sổ
 ảnh-trong-ảnh (Picture-in-Picture) nổi trên mọi ứng dụng.
 
+[![Release](https://img.shields.io/github/v/release/nguyenquocanhz/pip-viewer?color=6366f1)](https://github.com/nguyenquocanhz/pip-viewer/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-6366f1.svg)](LICENSE)
 [![Manifest V3 + V2](https://img.shields.io/badge/Manifest-V3%20%2B%20V2-22c55e.svg)](#)
 [![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ec4899.svg)](https://github.com/sponsors/nguyenquocanhz)
@@ -36,16 +37,24 @@ Có sẵn **hai bản dùng chung một mã nguồn**:
 
 ## Cài đặt
 
-**Chrome / Edge (bản MV3)**
+Tải bản đóng gói ở trang [**Releases**](https://github.com/nguyenquocanhz/pip-viewer/releases/latest),
+hoặc clone repo rồi dùng thẳng thư mục `mv3` / `mv2`.
 
-1. Mở `chrome://extensions`
-2. Bật **Chế độ dành cho nhà phát triển**
-3. **Tải tiện ích đã giải nén** → chọn thư mục `mv3`
+**Chrome / Edge / Brave / Cốc Cốc (bản MV3)**
+
+1. Tải `pip-viewer-mv3.zip` và giải nén (hoặc dùng thư mục `mv3` trong repo)
+2. Mở `chrome://extensions`
+3. Bật **Chế độ dành cho nhà phát triển**
+4. **Tải tiện ích đã giải nén** → chọn thư mục vừa giải nén
 
 **Firefox (bản MV2)**
 
-1. Mở `about:debugging#/runtime/this-firefox`
-2. **Load Temporary Add-on…** → chọn file `mv2/manifest.json`
+1. Tải `pip-viewer-mv2.zip` và giải nén (hoặc dùng thư mục `mv2` trong repo)
+2. Mở `about:debugging#/runtime/this-firefox`
+3. **Load Temporary Add-on…** → chọn file `manifest.json`
+
+> Add-on nạp kiểu tạm thời sẽ mất khi đóng Firefox — đó là giới hạn của add-on
+> chưa ký, không phải lỗi.
 
 ## Cấu hình
 
