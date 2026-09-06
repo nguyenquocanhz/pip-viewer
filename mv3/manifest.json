@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "PiP Viewer — Xem video & ảnh trong ảnh",
   "short_name": "PiP Viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mở video, ảnh hoặc canvas bất kỳ trong cửa sổ ảnh-trong-ảnh nổi trên mọi ứng dụng.",
   "icons": {
     "16": "icons/icon16.png",
@@ -27,12 +27,24 @@
     "page": "dashboard.html",
     "open_in_tab": true
   },
-  "permissions": ["contextMenus", "storage", "scripting", "activeTab"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["defaults.js", "content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "defaults.js",
+        "content.js"
+      ],
       "run_at": "document_idle",
       "all_frames": true,
       "match_about_blank": false
@@ -40,11 +52,15 @@
   ],
   "commands": {
     "toggle-pip": {
-      "suggested_key": { "default": "Alt+P" },
+      "suggested_key": {
+        "default": "Alt+P"
+      },
       "description": "Bật/tắt PiP cho video đang phát"
     },
     "pick-element": {
-      "suggested_key": { "default": "Alt+Shift+P" },
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
       "description": "Chọn phần tử để mở PiP"
     },
     "pip-image": {

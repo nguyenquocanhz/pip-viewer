@@ -6,7 +6,8 @@
 (() => {
   'use strict';
   if (window.__pipViewer__) return;
-  window.__pipViewer__ = true;
+  // Điểm mở rộng: các mô-đun khác của cùng extension gắn thêm tính năng vào đây.
+  window.__pipViewer__ = { version: '1.0.1', handlers: [] };
 
   const api = globalThis.chrome || globalThis.browser;
   const hasNativePiP =
@@ -328,6 +329,16 @@
     const v = video || pickBestVideo();
     if (!v) return ui.toast('Không tìm thấy video nào trên trang này', true);
 
+    // Mô-đun mở rộng có thể tự lo cửa sổ PiP; trả về true nghĩa là đã xử lý xong.
+    const override = window.__pipViewer__.openOverride;
+    if (override) {
+      try {
+        if (await override(v)) return;
+      } catch (err) {
+        console.warn('[PiP Viewer] mô-đun mở rộng lỗi:', err);
+      }
+    }
+
     if (document.pictureInPictureElement) {
       const same = document.pictureInPictureElement === v;
       await document.exitPictureInPicture().catch(() => {});
@@ -521,6 +532,14 @@
   });
 
   api.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    // Mô-đun mở rộng được xử lý trước; trả về true nghĩa là đã nhận thông điệp.
+    for (const handle of window.__pipViewer__.handlers) {
+      try {
+        if (handle(msg, sendResponse)) return true;
+      } catch (err) {
+        console.warn('[PiP Viewer] mô-đun mở rộng lỗi:', err);
+      }
+    }
     switch (msg && msg.type) {
       case 'PING':
         sendResponse({ ok: true });
@@ -585,5 +604,23 @@
         sendResponse({ ok: false });
     }
     return true;
+  });
+
+  /* Công khai phần lõi cho các mô-đun mở rộng dùng lại. */
+  Object.assign(window.__pipViewer__, {
+    settings,
+    ui,
+    deepQuery,
+    isVisible,
+    isDisabled,
+    pickBestVideo,
+    pickBestImage,
+    toggleVideoPiP,
+    floatVideo,
+    imagePiP,
+    canvasPiP,
+    pipElement,
+    hasNativePiP,
+    hasDocPiP,
   });
 })();
