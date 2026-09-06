@@ -3,6 +3,17 @@
  * (chỉ dùng khi phát triển: mở kèm ?stub=1).
  */
 (() => {
+  // Bang dich gia lap: doc thang tu _locales, doi bang ?lang=en
+  var LANG = new URLSearchParams(location.search).get('lang') || 'vi';
+  var MSGS = {};
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/mv3/_locales/' + LANG + '/messages.json', false);
+    xhr.send();
+    MSGS = JSON.parse(xhr.responseText);
+  } catch (e) { console.warn('khong doc duoc messages.json', e); }
+
+
   const store = JSON.parse(localStorage.getItem('pip-stub') || '{}');
   const persist = () => localStorage.setItem('pip-stub', JSON.stringify(store));
 
@@ -41,5 +52,9 @@
         ]),
     },
     tabs: { create: (o) => console.log('tabs.create', o) },
+    i18n: {
+      getMessage: (k) => (MSGS[k] && MSGS[k].message) || '',
+      getUILanguage: () => LANG,
+    },
   };
 })();

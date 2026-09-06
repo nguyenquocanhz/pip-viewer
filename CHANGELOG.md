@@ -2,6 +2,22 @@
 
 Ghi chú trong mỗi mục được `npm run release` dùng làm nội dung release.
 
+## 1.1.0
+
+**Extension giờ có tiếng Anh.** Chrome tự chọn ngôn ngữ theo cài đặt của trình
+duyệt: máy đặt tiếng Việt thì hiện tiếng Việt, máy đặt tiếng Anh thì hiện tiếng
+Anh. Không có nút đổi ngôn ngữ riêng vì đây là cách Chrome quy định.
+
+Dịch toàn bộ 131 chuỗi, không sót chỗ nào: tên và mô tả extension, popup, trang
+cấu hình, menu chuột phải, mô tả phím tắt, và cả các thông báo nhỏ hiện trên
+trang khi mở PiP hay khi có lỗi.
+
+### Sửa lỗi
+
+Extension nạp vào tab đã mở từ trước chỉ được tiêm một trong ba file cần thiết.
+Trước đây chưa lộ ra vì hai file kia chỉ chứa cấu hình mặc định, nhưng với bản
+dịch thì tab đó sẽ hiện tên khoá thô thay vì chữ. Nay tiêm đủ và đúng thứ tự.
+
 ## 1.0.1
 
 Bản bảo trì. Không thêm tính năng mới, nhưng **nên tải lại** vì gói của bản 1.0.0

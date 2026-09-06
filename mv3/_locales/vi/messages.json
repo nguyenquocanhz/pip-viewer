@@ -1,0 +1,395 @@
+{
+  "extName": {
+    "message": "PiP Viewer — Xem video & ảnh trong ảnh"
+  },
+  "extDesc": {
+    "message": "Mở video, ảnh hoặc canvas bất kỳ trong cửa sổ ảnh-trong-ảnh nổi trên mọi ứng dụng."
+  },
+  "actionTitle": {
+    "message": "PiP Viewer (Alt+P)"
+  },
+  "cmdTogglePip": {
+    "message": "Bật/tắt PiP cho video đang phát"
+  },
+  "cmdPickElement": {
+    "message": "Chọn phần tử để mở PiP"
+  },
+  "cmdPipImage": {
+    "message": "Mở PiP cho ảnh lớn nhất trên trang"
+  },
+  "menuVideo": {
+    "message": "Xem video trong ảnh-trong-ảnh"
+  },
+  "menuImage": {
+    "message": "Xem ảnh trong ảnh-trong-ảnh"
+  },
+  "menuPage": {
+    "message": "PiP video đang phát trên trang"
+  },
+  "menuPick": {
+    "message": "Chọn phần tử để mở PiP…"
+  },
+  "popupScanning": {
+    "message": "Đang quét trang…"
+  },
+  "popupUnavailable": {
+    "message": "Không dùng được trên trang này"
+  },
+  "popupFound": {
+    "message": "Tìm thấy {n} video"
+  },
+  "popupFoundInPip": {
+    "message": "Tìm thấy {n} video — đang ở chế độ PiP"
+  },
+  "popupNoVideo": {
+    "message": "Không thấy video — vẫn có thể mở PiP cho ảnh"
+  },
+  "popupBtnVideo": {
+    "message": "PiP video đang phát"
+  },
+  "popupBtnImage": {
+    "message": "Ảnh lớn nhất"
+  },
+  "popupBtnPick": {
+    "message": "Chọn phần tử"
+  },
+  "popupBtnExit": {
+    "message": "Thoát PiP"
+  },
+  "popupListTitle": {
+    "message": "Video trên trang"
+  },
+  "popupKeyToggle": {
+    "message": "bật/tắt PiP"
+  },
+  "popupKeyPick": {
+    "message": "chọn phần tử"
+  },
+  "popupSettings": {
+    "message": "Cấu hình đầy đủ"
+  },
+  "popupPro": {
+    "message": "PiP Viewer Pro — điều khiển trong cửa sổ PiP, phụ đề, chụp ảnh và cắt clip"
+  },
+  "videoN": {
+    "message": "Video {n}"
+  },
+  "statePlaying": {
+    "message": "đang phát"
+  },
+  "statePaused": {
+    "message": "đã dừng"
+  },
+  "optHoverButton": {
+    "message": "Hiện nút PiP khi rê chuột lên video"
+  },
+  "optAutoPiP": {
+    "message": "Tự bật PiP khi chuyển sang tab khác"
+  },
+  "dashTitle": {
+    "message": "Cấu hình PiP Viewer"
+  },
+  "dashLede": {
+    "message": "Mọi thay đổi được lưu ngay và áp dụng cho các tab đang mở."
+  },
+  "dashSaved": {
+    "message": "Đã lưu"
+  },
+  "navHover": {
+    "message": "Nút trên video"
+  },
+  "navBehavior": {
+    "message": "Hành vi tự động"
+  },
+  "navDisplay": {
+    "message": "Hiển thị & ảnh"
+  },
+  "navSites": {
+    "message": "Trang loại trừ"
+  },
+  "navKeys": {
+    "message": "Phím tắt"
+  },
+  "navPro": {
+    "message": "Nâng cấp Pro"
+  },
+  "navAbout": {
+    "message": "Trạng thái & giới thiệu"
+  },
+  "secHover": {
+    "message": "Nút PiP trên video"
+  },
+  "hoverBtnDesc": {
+    "message": "Một nút nhỏ xuất hiện ở góc video, bấm là mở PiP ngay."
+  },
+  "hoverPos": {
+    "message": "Vị trí nút"
+  },
+  "hoverPosDesc": {
+    "message": "Góc của video nơi nút hiển thị."
+  },
+  "cornerTL": {
+    "message": "Trên trái"
+  },
+  "cornerTR": {
+    "message": "Trên phải"
+  },
+  "cornerBL": {
+    "message": "Dưới trái"
+  },
+  "cornerBR": {
+    "message": "Dưới phải"
+  },
+  "minWidth": {
+    "message": "Bề ngang video tối thiểu"
+  },
+  "minWidthDesc": {
+    "message": "Video hẹp hơn mức này sẽ không hiện nút — tránh làm phiền ở quảng cáo và video nhỏ."
+  },
+  "secBehavior": {
+    "message": "Hành vi tự động"
+  },
+  "autoPiPDesc": {
+    "message": "Video đang phát sẽ tự nổi lên khi bạn rời tab."
+  },
+  "exitOnReturn": {
+    "message": "Thoát PiP khi quay lại tab"
+  },
+  "exitOnReturnDesc": {
+    "message": "Trả video về đúng vị trí cũ trên trang."
+  },
+  "pauseOnExit": {
+    "message": "Tạm dừng video khi đóng cửa sổ PiP"
+  },
+  "pauseOnExitDesc": {
+    "message": "Mặc định video vẫn chạy tiếp trên trang sau khi đóng PiP."
+  },
+  "secDisplay": {
+    "message": "Hiển thị & ảnh"
+  },
+  "showToast": {
+    "message": "Hiện thông báo nhỏ"
+  },
+  "showToastDesc": {
+    "message": "Thông báo ở cuối trang khi mở PiP hoặc khi có lỗi."
+  },
+  "imageMode": {
+    "message": "Cách mở ảnh"
+  },
+  "imageModeDesc": {
+    "message": "Ảnh được vẽ lên canvas rồi phát như video, nhờ vậy nổi trên mọi cửa sổ."
+  },
+  "imageModeReal": {
+    "message": "Cửa sổ PiP thật"
+  },
+  "imageModeFloat": {
+    "message": "Cửa sổ nổi trong trang"
+  },
+  "floatWidth": {
+    "message": "Bề ngang cửa sổ nổi"
+  },
+  "floatWidthDesc": {
+    "message": "Áp dụng cho cửa sổ nổi trong trang (khi trình duyệt không hỗ trợ PiP thật)."
+  },
+  "secSites": {
+    "message": "Trang loại trừ"
+  },
+  "sitesDesc": {
+    "message": "Trên những trang này, PiP Viewer sẽ không hiện nút khi rê chuột và không tự bật PiP. Bạn vẫn có thể mở PiP thủ công bằng phím tắt hoặc menu chuột phải. Nhập tên miền, ví dụ example.com — các tên miền con cũng được tính."
+  },
+  "sitesAdd": {
+    "message": "Thêm"
+  },
+  "sitesEmpty": {
+    "message": "Chưa có trang nào bị loại trừ."
+  },
+  "sitesRemove": {
+    "message": "Bỏ khỏi danh sách"
+  },
+  "secKeys": {
+    "message": "Phím tắt"
+  },
+  "keyToggleDesc": {
+    "message": "Bật/tắt PiP cho video đang phát"
+  },
+  "keyPickDesc": {
+    "message": "Chọn phần tử trên trang để mở PiP"
+  },
+  "keyImageDesc": {
+    "message": "Mở PiP cho ảnh lớn nhất trên trang"
+  },
+  "keyUnset": {
+    "message": "chưa gán"
+  },
+  "keysChange": {
+    "message": "Đổi phím tắt trong trình duyệt"
+  },
+  "keysHint": {
+    "message": "Mở thủ công trang {url} để đổi phím tắt."
+  },
+  "secPro": {
+    "message": "PiP Viewer Pro"
+  },
+  "proHead": {
+    "message": "Bản miễn phí đã đủ dùng hằng ngày."
+  },
+  "proSub": {
+    "message": "Bản Pro thêm những thứ cần nhiều công sức bảo trì hơn — mua một lần, dùng mãi."
+  },
+  "proBadge": {
+    "message": "Đang phát triển"
+  },
+  "colFeature": {
+    "message": "Tính năng"
+  },
+  "colFree": {
+    "message": "Miễn phí"
+  },
+  "colPro": {
+    "message": "Pro"
+  },
+  "featBasic": {
+    "message": "PiP cho video, ảnh, canvas"
+  },
+  "featEntry": {
+    "message": "Nút hover, phím tắt, menu chuột phải"
+  },
+  "featSites": {
+    "message": "Trang loại trừ"
+  },
+  "featControls": {
+    "message": "Điều khiển trong cửa sổ PiP (tua, tốc độ, âm lượng)"
+  },
+  "featSubs": {
+    "message": "Phụ đề hiển thị ngay trong cửa sổ PiP"
+  },
+  "featCapture": {
+    "message": "Chụp khung hình & ghi clip đoạn đang xem"
+  },
+  "featRules": {
+    "message": "Quy tắc riêng cho từng trang web"
+  },
+  "featAdjust": {
+    "message": "Chỉnh độ sáng, tương phản, xoay, lật gương"
+  },
+  "featGain": {
+    "message": "Khuếch đại âm lượng tới 300%"
+  },
+  "featLoop": {
+    "message": "Lặp đoạn A–B"
+  },
+  "featSrt": {
+    "message": "Nạp phụ đề .srt từ máy bằng kéo thả"
+  },
+  "featNight": {
+    "message": "Chế độ ban đêm một nút"
+  },
+  "featFrame": {
+    "message": "Tua từng khung hình khi tạm dừng"
+  },
+  "featSpeed": {
+    "message": "Nhớ tốc độ phát theo từng trang"
+  },
+  "featKeys": {
+    "message": "Phím tắt ngay trong cửa sổ PiP"
+  },
+  "proSee": {
+    "message": "Xem bản Pro"
+  },
+  "proSponsor": {
+    "message": "Ủng hộ tác giả"
+  },
+  "proHint": {
+    "message": "Chưa cần trả tiền để dùng — bản miễn phí không giới hạn thời gian."
+  },
+  "secAbout": {
+    "message": "Trạng thái & giới thiệu"
+  },
+  "statManifest": {
+    "message": "Phiên bản manifest"
+  },
+  "statBrowser": {
+    "message": "Trình duyệt"
+  },
+  "statNativePiP": {
+    "message": "PiP gốc cho video"
+  },
+  "statDocPiP": {
+    "message": "Document PiP (ảnh, HTML)"
+  },
+  "statSupported": {
+    "message": "Được hỗ trợ"
+  },
+  "statUnsupported": {
+    "message": "Không hỗ trợ"
+  },
+  "statUnsupportedFloat": {
+    "message": "Không hỗ trợ — dùng cửa sổ nổi"
+  },
+  "aboutUsage": {
+    "message": "Cách dùng: bấm biểu tượng extension để chọn nhanh, chuột phải lên video hoặc ảnh để mở PiP, hoặc dùng Chọn phần tử rồi nhấp vào video / ảnh / canvas bất kỳ."
+  },
+  "linkSource": {
+    "message": "Mã nguồn trên GitHub"
+  },
+  "linkIssues": {
+    "message": "Báo lỗi / góp ý"
+  },
+  "linkSponsor": {
+    "message": "GitHub Sponsors"
+  },
+  "resetTitle": {
+    "message": "Khôi phục cài đặt gốc"
+  },
+  "resetDesc": {
+    "message": "Xoá mọi tuỳ chỉnh, kể cả danh sách trang loại trừ."
+  },
+  "resetBtn": {
+    "message": "Khôi phục"
+  },
+  "resetConfirm": {
+    "message": "Khôi phục toàn bộ cài đặt về mặc định?"
+  },
+  "unitPx": {
+    "message": "{n} px"
+  },
+  "unitPercent": {
+    "message": "{n}%"
+  },
+  "noVideo": {
+    "message": "Không tìm thấy video nào trên trang này"
+  },
+  "cannotPiPVideo": {
+    "message": "Không thể mở PiP cho video này"
+  },
+  "fallbackFloat": {
+    "message": "Trình duyệt không hỗ trợ PiP gốc — dùng cửa sổ nổi trong trang"
+  },
+  "noImage": {
+    "message": "Không tìm thấy ảnh nào"
+  },
+  "imageLoadFailed": {
+    "message": "Không tải được ảnh này"
+  },
+  "cannotPiPElement": {
+    "message": "Không thể mở PiP cho phần tử này"
+  },
+  "noElement": {
+    "message": "Không xác định được phần tử"
+  },
+  "notMedia": {
+    "message": "Phần tử này không phải video hay ảnh"
+  },
+  "pickerTip": {
+    "message": "Nhấp vào video hoặc ảnh để mở PiP — Esc để huỷ"
+  },
+  "windowClose": {
+    "message": "Đóng"
+  },
+  "windowTitle": {
+    "message": "Ảnh trong ảnh"
+  },
+  "imageWindowTitle": {
+    "message": "Ảnh — {name}"
+  }
+}

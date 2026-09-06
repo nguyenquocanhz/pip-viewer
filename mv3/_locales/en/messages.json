@@ -1,0 +1,395 @@
+{
+  "extName": {
+    "message": "PiP Viewer — Picture-in-Picture for video & images"
+  },
+  "extDesc": {
+    "message": "Open any video, image or canvas in a picture-in-picture window that floats above every app."
+  },
+  "actionTitle": {
+    "message": "PiP Viewer (Alt+P)"
+  },
+  "cmdTogglePip": {
+    "message": "Toggle picture-in-picture for the playing video"
+  },
+  "cmdPickElement": {
+    "message": "Pick an element to open in PiP"
+  },
+  "cmdPipImage": {
+    "message": "Open PiP for the largest image on the page"
+  },
+  "menuVideo": {
+    "message": "Watch video in picture-in-picture"
+  },
+  "menuImage": {
+    "message": "View image in picture-in-picture"
+  },
+  "menuPage": {
+    "message": "PiP the video playing on this page"
+  },
+  "menuPick": {
+    "message": "Pick an element to open in PiP…"
+  },
+  "popupScanning": {
+    "message": "Scanning the page…"
+  },
+  "popupUnavailable": {
+    "message": "Not available on this page"
+  },
+  "popupFound": {
+    "message": "{n} video(s) found"
+  },
+  "popupFoundInPip": {
+    "message": "{n} video(s) found — picture-in-picture is on"
+  },
+  "popupNoVideo": {
+    "message": "No video found — you can still open an image in PiP"
+  },
+  "popupBtnVideo": {
+    "message": "PiP the playing video"
+  },
+  "popupBtnImage": {
+    "message": "Largest image"
+  },
+  "popupBtnPick": {
+    "message": "Pick element"
+  },
+  "popupBtnExit": {
+    "message": "Exit PiP"
+  },
+  "popupListTitle": {
+    "message": "Videos on this page"
+  },
+  "popupKeyToggle": {
+    "message": "toggle PiP"
+  },
+  "popupKeyPick": {
+    "message": "pick element"
+  },
+  "popupSettings": {
+    "message": "All settings"
+  },
+  "popupPro": {
+    "message": "PiP Viewer Pro — in-window controls, subtitles, screenshots and clips"
+  },
+  "videoN": {
+    "message": "Video {n}"
+  },
+  "statePlaying": {
+    "message": "playing"
+  },
+  "statePaused": {
+    "message": "paused"
+  },
+  "optHoverButton": {
+    "message": "Show a PiP button when hovering a video"
+  },
+  "optAutoPiP": {
+    "message": "Turn on PiP when you switch tabs"
+  },
+  "dashTitle": {
+    "message": "PiP Viewer settings"
+  },
+  "dashLede": {
+    "message": "Every change saves immediately and applies to open tabs."
+  },
+  "dashSaved": {
+    "message": "Saved"
+  },
+  "navHover": {
+    "message": "Button on videos"
+  },
+  "navBehavior": {
+    "message": "Automatic behaviour"
+  },
+  "navDisplay": {
+    "message": "Display & images"
+  },
+  "navSites": {
+    "message": "Excluded sites"
+  },
+  "navKeys": {
+    "message": "Keyboard shortcuts"
+  },
+  "navPro": {
+    "message": "Upgrade to Pro"
+  },
+  "navAbout": {
+    "message": "Status & about"
+  },
+  "secHover": {
+    "message": "PiP button on videos"
+  },
+  "hoverBtnDesc": {
+    "message": "A small button appears in the corner of the video; one click opens PiP."
+  },
+  "hoverPos": {
+    "message": "Button position"
+  },
+  "hoverPosDesc": {
+    "message": "Which corner of the video it sits in."
+  },
+  "cornerTL": {
+    "message": "Top left"
+  },
+  "cornerTR": {
+    "message": "Top right"
+  },
+  "cornerBL": {
+    "message": "Bottom left"
+  },
+  "cornerBR": {
+    "message": "Bottom right"
+  },
+  "minWidth": {
+    "message": "Minimum video width"
+  },
+  "minWidthDesc": {
+    "message": "Narrower videos get no button — keeps ads and thumbnails out of the way."
+  },
+  "secBehavior": {
+    "message": "Automatic behaviour"
+  },
+  "autoPiPDesc": {
+    "message": "The playing video floats up on its own when you leave the tab."
+  },
+  "exitOnReturn": {
+    "message": "Exit PiP when you come back"
+  },
+  "exitOnReturnDesc": {
+    "message": "Puts the video back exactly where it was on the page."
+  },
+  "pauseOnExit": {
+    "message": "Pause the video when PiP closes"
+  },
+  "pauseOnExitDesc": {
+    "message": "By default the video keeps playing on the page after PiP closes."
+  },
+  "secDisplay": {
+    "message": "Display & images"
+  },
+  "showToast": {
+    "message": "Show small notifications"
+  },
+  "showToastDesc": {
+    "message": "A note at the bottom of the page when PiP opens or something fails."
+  },
+  "imageMode": {
+    "message": "How images open"
+  },
+  "imageModeDesc": {
+    "message": "Images are drawn to a canvas and played as video, so they float above every window."
+  },
+  "imageModeReal": {
+    "message": "Real PiP window"
+  },
+  "imageModeFloat": {
+    "message": "Floating window in page"
+  },
+  "floatWidth": {
+    "message": "Floating window width"
+  },
+  "floatWidthDesc": {
+    "message": "Used for the in-page floating window when the browser has no real PiP."
+  },
+  "secSites": {
+    "message": "Excluded sites"
+  },
+  "sitesDesc": {
+    "message": "On these sites PiP Viewer shows no hover button and never turns PiP on by itself. You can still open PiP by hand with a shortcut or the right-click menu. Enter a domain such as example.com — subdomains count too."
+  },
+  "sitesAdd": {
+    "message": "Add"
+  },
+  "sitesEmpty": {
+    "message": "No sites excluded yet."
+  },
+  "sitesRemove": {
+    "message": "Remove from list"
+  },
+  "secKeys": {
+    "message": "Keyboard shortcuts"
+  },
+  "keyToggleDesc": {
+    "message": "Toggle PiP for the playing video"
+  },
+  "keyPickDesc": {
+    "message": "Pick an element on the page to open in PiP"
+  },
+  "keyImageDesc": {
+    "message": "Open PiP for the largest image on the page"
+  },
+  "keyUnset": {
+    "message": "not set"
+  },
+  "keysChange": {
+    "message": "Change shortcuts in the browser"
+  },
+  "keysHint": {
+    "message": "Open {url} manually to change the shortcuts."
+  },
+  "secPro": {
+    "message": "PiP Viewer Pro"
+  },
+  "proHead": {
+    "message": "The free version is enough for everyday use."
+  },
+  "proSub": {
+    "message": "Pro adds the parts that take real upkeep — buy once, keep it."
+  },
+  "proBadge": {
+    "message": "In development"
+  },
+  "colFeature": {
+    "message": "Feature"
+  },
+  "colFree": {
+    "message": "Free"
+  },
+  "colPro": {
+    "message": "Pro"
+  },
+  "featBasic": {
+    "message": "PiP for video, images, canvas"
+  },
+  "featEntry": {
+    "message": "Hover button, shortcuts, right-click menu"
+  },
+  "featSites": {
+    "message": "Excluded sites"
+  },
+  "featControls": {
+    "message": "Controls inside the PiP window (seek, speed, volume)"
+  },
+  "featSubs": {
+    "message": "Subtitles shown inside the PiP window"
+  },
+  "featCapture": {
+    "message": "Grab a frame, record the part you are watching"
+  },
+  "featRules": {
+    "message": "Per-site rules"
+  },
+  "featAdjust": {
+    "message": "Brightness, contrast, rotate, mirror"
+  },
+  "featGain": {
+    "message": "Boost volume up to 300%"
+  },
+  "featLoop": {
+    "message": "A–B loop"
+  },
+  "featSrt": {
+    "message": "Drag a local .srt file onto the window"
+  },
+  "featNight": {
+    "message": "One-button night mode"
+  },
+  "featFrame": {
+    "message": "Step frame by frame while paused"
+  },
+  "featSpeed": {
+    "message": "Remember playback speed per site"
+  },
+  "featKeys": {
+    "message": "Shortcuts inside the PiP window"
+  },
+  "proSee": {
+    "message": "See Pro"
+  },
+  "proSponsor": {
+    "message": "Support the author"
+  },
+  "proHint": {
+    "message": "No payment needed to use it — the free version never expires."
+  },
+  "secAbout": {
+    "message": "Status & about"
+  },
+  "statManifest": {
+    "message": "Manifest version"
+  },
+  "statBrowser": {
+    "message": "Browser"
+  },
+  "statNativePiP": {
+    "message": "Native PiP for video"
+  },
+  "statDocPiP": {
+    "message": "Document PiP (images, HTML)"
+  },
+  "statSupported": {
+    "message": "Supported"
+  },
+  "statUnsupported": {
+    "message": "Not supported"
+  },
+  "statUnsupportedFloat": {
+    "message": "Not supported — falls back to a floating window"
+  },
+  "aboutUsage": {
+    "message": "How to use it: click the extension icon for quick actions, right-click a video or image to open PiP, or use Pick element and click any video, image or canvas."
+  },
+  "linkSource": {
+    "message": "Source on GitHub"
+  },
+  "linkIssues": {
+    "message": "Report a bug / suggest"
+  },
+  "linkSponsor": {
+    "message": "GitHub Sponsors"
+  },
+  "resetTitle": {
+    "message": "Reset to defaults"
+  },
+  "resetDesc": {
+    "message": "Clears every customisation, including the excluded sites."
+  },
+  "resetBtn": {
+    "message": "Reset"
+  },
+  "resetConfirm": {
+    "message": "Reset all settings to their defaults?"
+  },
+  "unitPx": {
+    "message": "{n} px"
+  },
+  "unitPercent": {
+    "message": "{n}%"
+  },
+  "noVideo": {
+    "message": "No video found on this page"
+  },
+  "cannotPiPVideo": {
+    "message": "Cannot open PiP for this video"
+  },
+  "fallbackFloat": {
+    "message": "This browser has no native PiP — using an in-page floating window"
+  },
+  "noImage": {
+    "message": "No image found"
+  },
+  "imageLoadFailed": {
+    "message": "Could not load this image"
+  },
+  "cannotPiPElement": {
+    "message": "Cannot open PiP for this element"
+  },
+  "noElement": {
+    "message": "No element identified"
+  },
+  "notMedia": {
+    "message": "That element is not a video or an image"
+  },
+  "pickerTip": {
+    "message": "Click a video or image to open PiP — Esc to cancel"
+  },
+  "windowClose": {
+    "message": "Close"
+  },
+  "windowTitle": {
+    "message": "Picture in picture"
+  },
+  "imageWindowTitle": {
+    "message": "Image — {name}"
+  }
+}

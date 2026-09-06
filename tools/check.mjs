@@ -1,6 +1,7 @@
 // Kiểm tra nhanh: manifest hợp lệ, file khai báo có thật, JS không lỗi cú pháp.
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { MESSAGES, LOCALES } from './messages.mjs';
 
 let fails = 0;
 const fail = (m) => { console.error('  ✗ ' + m); fails++; };
@@ -58,6 +59,49 @@ for (const dir of ['mv3', 'mv2']) {
     else fail('MV2 cần browser_action');
   }
 
+  // ---- Ngôn ngữ ----
+  const known = new Set(Object.keys(MESSAGES));
+  let i18nBad = 0;
+
+  for (const loc of LOCALES) {
+    const p = `${dir}/_locales/${loc}/messages.json`;
+    if (!existsSync(p)) {
+      fail(`thiếu ${p} — chạy npm run i18n`);
+      i18nBad++;
+      continue;
+    }
+    const n = Object.keys(JSON.parse(readFileSync(p, 'utf8'))).length;
+    if (n !== known.size) {
+      fail(`${loc} có ${n} chuỗi, nguồn có ${known.size} — chạy npm run i18n`);
+      i18nBad++;
+    }
+  }
+  if (mf.default_locale && !LOCALES.includes(mf.default_locale)) {
+    fail(`default_locale "${mf.default_locale}" không nằm trong danh sách ngôn ngữ`);
+    i18nBad++;
+  }
+
+  // Mọi khoá dùng trong manifest, HTML và JS đều phải có bản dịch
+  const used = new Set();
+  for (const m of JSON.stringify(mf).matchAll(/__MSG_(\w+)__/g)) used.add(m[1]);
+  for (const f of readdirSync(dir)) {
+    const src = () => readFileSync(`${dir}/${f}`, 'utf8');
+    // Thuộc tính chỉ có ở HTML; quét cả .js sẽ dính phần chú thích của i18n.js
+    if (f.endsWith('.html')) {
+      for (const m of src().matchAll(/data-i18n(?:-doc|-title|-ph|-aria)?="([^"]+)"/g)) used.add(m[1]);
+    } else if (f.endsWith('.js') && f !== 'i18n.js') {
+      for (const m of src().matchAll(/\bt\('([A-Za-z][A-Za-z0-9_]*)'/g)) used.add(m[1]);
+    }
+  }
+  const unknown = [...used].filter((k) => !known.has(k));
+  if (unknown.length) {
+    fail('dùng khoá chưa có bản dịch: ' + unknown.join(', '));
+    i18nBad++;
+  }
+  if (!i18nBad) {
+    pass(`${LOCALES.length} ngôn ngữ × ${known.size} chuỗi, ${used.size} khoá đang dùng đều hợp lệ`);
+  }
+
   for (const f of readdirSync(dir).filter((f) => f.endsWith('.js'))) {
     try {
       execFileSync(process.execPath, ['--check', `${dir}/${f}`], { stdio: 'pipe' });
@@ -69,7 +113,7 @@ for (const dir of ['mv3', 'mv2']) {
 
   // Hai bản phải cùng mã nguồn dùng chung
   if (dir === 'mv2') {
-    for (const f of ['defaults.js', 'content.js', 'background.js', 'popup.js', 'popup.css',
+    for (const f of ['i18n.js', 'defaults.js', 'content.js', 'background.js', 'popup.js', 'popup.css',
                      'popup.html', 'dashboard.js', 'dashboard.css', 'dashboard.html']) {
       const a = readFileSync(`mv3/${f}`, 'utf8');
       const b = readFileSync(`mv2/${f}`, 'utf8');

@@ -1,5 +1,6 @@
 const api = globalThis.chrome || globalThis.browser;
 const $ = (id) => document.getElementById(id);
+const t = PIP_I18N.t;
 
 /** Gửi lệnh qua background để nó lo phần tiêm content script khi cần. */
 function ask(payload) {
@@ -25,15 +26,15 @@ async function refresh() {
   const list = $('list');
 
   if (!res.ok) {
-    status.textContent = 'Không dùng được trên trang này';
+    status.textContent = t('popupUnavailable');
     wrap.hidden = true;
     return;
   }
 
   const vids = res.videos || [];
   status.textContent = vids.length
-    ? `Tìm thấy ${vids.length} video${res.inPiP ? ' — đang ở chế độ PiP' : ''}`
-    : 'Không thấy video — vẫn có thể mở PiP cho ảnh';
+    ? t(res.inPiP ? 'popupFoundInPip' : 'popupFound', { n: vids.length })
+    : t('popupNoVideo');
 
   list.textContent = '';
   wrap.hidden = vids.length < 2;
@@ -44,24 +45,24 @@ async function refresh() {
     const btn = document.createElement('button');
     if (v.active) btn.className = 'active';
 
-    const t = document.createElement('span');
-    t.className = 't';
+    const label = document.createElement('span');
+    label.className = 't';
     if (v.playing) {
       const dot = document.createElement('span');
       dot.className = 'dot';
-      t.appendChild(dot);
+      label.appendChild(dot);
     }
-    t.append(v.label || `Video ${v.index + 1}`);
+    label.append(v.label || t('videoN', { n: v.index + 1 }));
 
     const m = document.createElement('span');
     m.className = 'm';
     m.textContent = [
       v.width && v.height ? `${v.width}×${v.height}` : '',
       fmt(v.duration),
-      v.playing ? 'đang phát' : 'đã dừng',
+      t(v.playing ? 'statePlaying' : 'statePaused'),
     ].filter(Boolean).join(' · ');
 
-    btn.append(t, m);
+    btn.append(label, m);
     btn.addEventListener('click', async () => {
       await ask({ type: 'PIP_INDEX', index: v.index });
       window.close();
@@ -113,4 +114,5 @@ $('opt-blur').addEventListener('change', (e) =>
   api.storage.sync.set({ autoPiPOnBlur: e.target.checked })
 );
 
+PIP_I18N.apply();
 refresh();

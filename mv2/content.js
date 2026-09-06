@@ -10,6 +10,7 @@
   window.__pipViewer__ = { version: '1.0.1', handlers: [] };
 
   const api = globalThis.chrome || globalThis.browser;
+  const t = (globalThis.PIP_I18N || { t: (k) => k }).t;
   const hasNativePiP =
     'pictureInPictureEnabled' in document && document.pictureInPictureEnabled;
   const hasDocPiP = 'documentPictureInPicture' in window;
@@ -160,11 +161,12 @@
     function toast(msg, isErr) {
       if (!settings.showToast) return;
       ensure();
-      const t = document.createElement('div');
-      t.className = 'toast' + (isErr ? ' err' : '');
-      t.textContent = msg;
-      layer.appendChild(t);
-      setTimeout(() => t.remove(), 2600);
+      // Đặt tên khác 't' vì 't' ở phạm vi ngoài là hàm dịch.
+      const el = document.createElement('div');
+      el.className = 'toast' + (isErr ? ' err' : '');
+      el.textContent = msg;
+      layer.appendChild(el);
+      setTimeout(() => el.remove(), 2600);
     }
 
     /* --- Nút nổi trên video khi rê chuột --- */
@@ -222,10 +224,10 @@
 
       const head = document.createElement('header');
       const label = document.createElement('span');
-      label.textContent = title || 'Picture in Picture';
+      label.textContent = title || t('windowTitle');
       const close = document.createElement('button');
       close.textContent = '✕';
-      close.title = 'Đóng';
+      close.title = t('windowClose');
       head.append(label, close);
 
       const body = document.createElement('div');
@@ -270,7 +272,7 @@
       box.className = 'pickbox';
       const tip = document.createElement('div');
       tip.className = 'picktip';
-      tip.textContent = 'Nhấp vào video hoặc ảnh để mở PiP — Esc để huỷ';
+      tip.textContent = t('pickerTip');
       layer.append(box, tip);
 
       let current = null;
@@ -327,7 +329,7 @@
 
   async function toggleVideoPiP(video) {
     const v = video || pickBestVideo();
-    if (!v) return ui.toast('Không tìm thấy video nào trên trang này', true);
+    if (!v) return ui.toast(t('noVideo'), true);
 
     // Mô-đun mở rộng có thể tự lo cửa sổ PiP; trả về true nghĩa là đã xử lý xong.
     const override = window.__pipViewer__.openOverride;
@@ -365,7 +367,7 @@
   function floatVideo(v) {
     const placeholder = document.createComment('pip-viewer');
     const parent = v.parentNode;
-    if (!parent) return ui.toast('Không thể mở PiP cho video này', true);
+    if (!parent) return ui.toast(t('cannotPiPVideo'), true);
     parent.insertBefore(placeholder, v);
     const prevStyle = v.getAttribute('style') || '';
     const hadControls = v.hasAttribute('controls');
@@ -377,7 +379,7 @@
       if (!hadControls) v.removeAttribute('controls');
       if (placeholder.parentNode) placeholder.parentNode.replaceChild(v, placeholder);
     });
-    ui.toast('Trình duyệt không hỗ trợ PiP gốc — dùng cửa sổ nổi trong trang');
+    ui.toast(t('fallbackFloat'));
   }
 
   /**
@@ -385,7 +387,7 @@
    * nhờ vậy ảnh nổi trên mọi cửa sổ giống như video.
    */
   async function imagePiP(src) {
-    if (!src) return ui.toast('Không tìm thấy ảnh nào', true);
+    if (!src) return ui.toast(t('noImage'), true);
 
     const load = (crossOrigin) =>
       new Promise((res, rej) => {
@@ -401,7 +403,7 @@
     try { img = await load(true); } catch (_) {
       try { img = await load(false); } catch (_) {}
     }
-    if (!img) return ui.toast('Không tải được ảnh này', true);
+    if (!img) return ui.toast(t('imageLoadFailed'), true);
 
     const wantNative = settings.imageMode !== 'float';
     if (wantNative && hasNativePiP &&
@@ -458,14 +460,14 @@
 
     const clone = new Image();
     clone.src = img.src;
-    ui.floatWindow(clone, 'Ảnh — ' + (src.split('/').pop() || '').slice(0, 40));
+    ui.floatWindow(clone, t('imageWindowTitle', { name: (src.split('/').pop() || '').slice(0, 40) }));
   }
 
   /** PiP cho canvas (game, biểu đồ, bản đồ...). */
   async function canvasPiP(canvas) {
     if (!hasNativePiP || typeof canvas.captureStream !== 'function') {
       try { return imagePiP(canvas.toDataURL()); } catch (_) {
-        return ui.toast('Không thể mở PiP cho phần tử này', true);
+        return ui.toast(t('cannotPiPElement'), true);
       }
     }
     try {
@@ -479,12 +481,12 @@
       await video.requestPictureInPicture();
       video.addEventListener('leavepictureinpicture', () => video.remove());
     } catch (_) {
-      ui.toast('Không thể mở PiP cho phần tử này', true);
+      ui.toast(t('cannotPiPElement'), true);
     }
   }
 
   function pipElement(el) {
-    if (!el) return ui.toast('Không xác định được phần tử', true);
+    if (!el) return ui.toast(t('noElement'), true);
     if (el.tagName === 'VIDEO') return toggleVideoPiP(el);
     if (el.tagName === 'IMG') return imagePiP(el.currentSrc || el.src);
     if (el.tagName === 'CANVAS') return canvasPiP(el);
@@ -493,7 +495,7 @@
     if (m) return imagePiP(new URL(m[1], location.href).href);
     const inner = el.querySelector('video, img, canvas');
     if (inner) return pipElement(inner);
-    ui.toast('Phần tử này không phải video hay ảnh', true);
+    ui.toast(t('notMedia'), true);
   }
 
   /* ------------------------------------------------------------------ */

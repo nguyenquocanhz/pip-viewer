@@ -47,6 +47,15 @@ Các nút bên dưới gọi đúng những thông điệp mà background gửi 
 
 <script>
 /* --- Giả lập API extension để content.js chạy được trong trang thường --- */
+/* Đọc thẳng bảng dịch thật, đổi ngôn ngữ bằng ?lang=en */
+const LANG = new URLSearchParams(location.search).get('lang') || 'vi';
+let MSGS = {};
+try {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/mv3/_locales/' + LANG + '/messages.json', false);
+  xhr.send();
+  MSGS = JSON.parse(xhr.responseText);
+} catch (e) { console.warn('không đọc được messages.json', e); }
 const store = { hoverButton: true, autoPiPOnBlur: false };
 let listener = null;
 window.chrome = {
@@ -58,6 +67,10 @@ window.chrome = {
     onChanged: { addListener() {} },
   },
   runtime: { onMessage: { addListener: (fn) => (listener = fn) } },
+  i18n: {
+    getMessage: (k) => (MSGS[k] && MSGS[k].message) || '',
+    getUILanguage: () => LANG,
+  },
 };
 window.__send = (msg) =>
   new Promise((res) => (listener ? listener(msg, {}, res) : res({ ok: false })));
@@ -123,6 +136,7 @@ for (const b of document.querySelectorAll('[data-msg]')) {
   });
 }
 </script>
+<script src="../mv3/i18n.js"></script>
 <script src="../mv3/content.js"></script>
 </body>
 </html>

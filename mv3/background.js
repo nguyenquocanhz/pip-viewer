@@ -10,14 +10,16 @@ const api = globalThis.chrome || globalThis.browser;
  *   PIP_COMMANDS = { 'ten-lenh': (tab, send) => send(tab.id, { type: 'X' }) }
  *   PIP_MENUS    = [ { id, title, contexts, message } ]
  */
+const t = (k) => (api.i18n && api.i18n.getMessage(k)) || k;
+
 const EXTRA_COMMANDS = globalThis.PIP_COMMANDS || {};
 const EXTRA_MENUS = globalThis.PIP_MENUS || [];
 
 const MENUS = [
-  { id: 'pip-video', title: 'Xem video trong ảnh-trong-ảnh', contexts: ['video'] },
-  { id: 'pip-image', title: 'Xem ảnh trong ảnh-trong-ảnh', contexts: ['image'] },
-  { id: 'pip-page', title: 'PiP video đang phát trên trang', contexts: ['page', 'frame'] },
-  { id: 'pip-pick', title: 'Chọn phần tử để mở PiP…', contexts: ['page', 'frame'] },
+  { id: 'pip-video', title: t('menuVideo'), contexts: ['video'] },
+  { id: 'pip-image', title: t('menuImage'), contexts: ['image'] },
+  { id: 'pip-page', title: t('menuPage'), contexts: ['page', 'frame'] },
+  { id: 'pip-pick', title: t('menuPick'), contexts: ['page', 'frame'] },
 ];
 
 function buildMenus() {
@@ -32,21 +34,31 @@ function buildMenus() {
 api.runtime.onInstalled.addListener(buildMenus);
 if (api.runtime.onStartup) api.runtime.onStartup.addListener(buildMenus);
 
+/** Đúng thứ tự như content_scripts trong manifest — thiếu i18n.js là hiện khoá thô. */
+const CONTENT_FILES = ['i18n.js', 'defaults.js', 'content.js'];
+
 /** Tiêm content script rồi thử gửi lại (trang đã mở trước khi cài extension). */
 function inject(tabId, frameId, done) {
   if (api.scripting && api.scripting.executeScript) {
     api.scripting.executeScript(
       {
         target: frameId != null ? { tabId, frameIds: [frameId] } : { tabId, allFrames: true },
-        files: ['content.js'],
+        files: CONTENT_FILES,
       },
       () => done(api.runtime.lastError)
     );
   } else if (api.tabs.executeScript) {
-    const opts = { file: 'content.js', runAt: 'document_idle' };
+    // MV2 chỉ tiêm được một file mỗi lần, nên nối tiếp theo đúng thứ tự
+    const opts = { runAt: 'document_idle' };
     if (frameId != null) opts.frameId = frameId;
     else opts.allFrames = true;
-    api.tabs.executeScript(tabId, opts, () => done(api.runtime.lastError));
+    let i = 0;
+    const next = () => {
+      if (api.runtime.lastError) return done(api.runtime.lastError);
+      if (i >= CONTENT_FILES.length) return done(null);
+      api.tabs.executeScript(tabId, Object.assign({ file: CONTENT_FILES[i++] }, opts), next);
+    };
+    next();
   } else {
     done(new Error('no injection API'));
   }

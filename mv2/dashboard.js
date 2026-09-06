@@ -1,6 +1,7 @@
 /** Trang cấu hình PiP Viewer. */
 const api = globalThis.chrome || globalThis.browser;
 const DEFAULTS = globalThis.PIP_DEFAULTS;
+const t = PIP_I18N.t;
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -36,7 +37,7 @@ function render() {
     else el.value = v;
   }
   for (const out of $$('output[data-for]')) {
-    out.textContent = state[out.dataset.for] + ' px';
+    out.textContent = t('unitPx', { n: state[out.dataset.for] });
   }
   applyDependencies();
   renderSites();
@@ -60,7 +61,7 @@ for (const el of $$('[data-key]')) {
 
     if (el.type === 'range') {
       const out = $(`output[data-for="${key}"]`);
-      if (out) out.textContent = value + ' px';
+      if (out) out.textContent = t('unitPx', { n: value });
     }
     save({ [key]: value });
   });
@@ -87,7 +88,7 @@ function renderSites() {
     const del = document.createElement('button');
     del.type = 'button';
     del.textContent = '✕';
-    del.title = 'Bỏ khỏi danh sách';
+    del.title = t('sitesRemove');
     del.addEventListener('click', () => {
       save({ disabledSites: state.disabledSites.filter((h) => h !== host) });
       renderSites();
@@ -115,19 +116,24 @@ $('#site-form').addEventListener('submit', (e) => {
 
 /* ---------------- Phím tắt ---------------- */
 
+function showHint(url) {
+  const hint = $('#shortcut-hint');
+  hint.textContent = t('keysHint', { url });
+  hint.hidden = false;
+}
+
 $('#btn-shortcuts').addEventListener('click', () => {
   const url = navigator.userAgent.includes('Firefox')
     ? 'about:addons'
     : 'chrome://extensions/shortcuts';
-  $('#shortcut-url').textContent = url;
   try {
     api.tabs.create({ url });
   } catch (_) {
-    $('#shortcut-hint').hidden = false;
+    showHint(url);
   }
   // Firefox không cho mở about:addons từ extension -> hiện hướng dẫn thủ công
   setTimeout(() => {
-    if (api.runtime.lastError) $('#shortcut-hint').hidden = false;
+    if (api.runtime.lastError) showHint(url);
   }, 200);
 });
 
@@ -146,7 +152,7 @@ if (api.commands && api.commands.getAll) {
       if (!sc) {
         const em = document.createElement('span');
         em.className = 'unset';
-        em.textContent = 'chưa gán';
+        em.textContent = t('keyUnset');
         cell.appendChild(em);
         return;
       }
@@ -166,16 +172,16 @@ function renderStatus() {
   $('#version').textContent = 'v' + mf.version;
 
   const rows = [
-    ['Phiên bản manifest', 'MV' + mf.manifest_version, null],
-    ['Trình duyệt', navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Chromium', null],
+    [t('statManifest'), 'MV' + mf.manifest_version, null],
+    [t('statBrowser'), navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Chromium', null],
     [
-      'PiP gốc cho video',
-      document.pictureInPictureEnabled ? 'Được hỗ trợ' : 'Không hỗ trợ — dùng cửa sổ nổi',
+      t('statNativePiP'),
+      document.pictureInPictureEnabled ? t('statSupported') : t('statUnsupportedFloat'),
       !!document.pictureInPictureEnabled,
     ],
     [
-      'Document PiP (ảnh, HTML)',
-      'documentPictureInPicture' in window ? 'Được hỗ trợ' : 'Không hỗ trợ',
+      t('statDocPiP'),
+      'documentPictureInPicture' in window ? t('statSupported') : t('statUnsupported'),
       'documentPictureInPicture' in window,
     ],
   ];
@@ -210,9 +216,9 @@ $('#btn-sponsor').addEventListener('click', () => openUrl(LINKS.sponsor || LINKS
 function renderLinks() {
   const box = $('#links');
   const items = [
-    ['Mã nguồn trên GitHub', LINKS.repo],
-    ['Báo lỗi / góp ý', LINKS.issues],
-    ['GitHub Sponsors', LINKS.sponsor],
+    [t('linkSource'), LINKS.repo],
+    [t('linkIssues'), LINKS.issues],
+    [t('linkSponsor'), LINKS.sponsor],
     ['Ko-fi', LINKS.kofi],
     ['MoMo', LINKS.momo],
     ['PayPal', LINKS.paypal],
@@ -237,7 +243,7 @@ renderLinks();
 /* ---------------- Khôi phục mặc định ---------------- */
 
 $('#btn-reset').addEventListener('click', () => {
-  if (!confirm('Khôi phục toàn bộ cài đặt về mặc định?')) return;
+  if (!confirm(t('resetConfirm'))) return;
   state = Object.assign({}, DEFAULTS);
   api.storage.sync.set(state, () => {
     void api.runtime.lastError;
@@ -263,6 +269,8 @@ const io = new IntersectionObserver(
 sections.forEach((s) => s && io.observe(s));
 
 /* ---------------- Khởi động ---------------- */
+
+PIP_I18N.apply();
 
 api.storage.sync.get(DEFAULTS, (v) => {
   void api.runtime.lastError;

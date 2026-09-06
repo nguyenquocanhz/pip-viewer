@@ -2,6 +2,7 @@
 import { copyFileSync } from 'node:fs';
 
 const SHARED = [
+  'i18n.js',
   'defaults.js',
   'content.js',
   'background.js',
